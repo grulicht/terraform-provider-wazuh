@@ -20,7 +20,7 @@ jobs:
         run: |
           for i in {1..30}; do
             docker ps
-            if curl -k -sSf https://localhost:443/ >/dev/null; then
+            if curl -k -sSf https://localhost/app/login? >/dev/null; then
               echo "Wazuh GUI is up!"
               exit 0
             fi
@@ -70,32 +70,32 @@ jobs:
 
       - name: 🧰 Install required packages
         run: |
-          apt-get update
-          apt-get install -y gnupg apt-transport-https
+          sudo apt-get update
+          sudo apt-get install -y gnupg apt-transport-https
 
       - name: 🔑 Add Wazuh GPG key
         run: |
           curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | \
-            gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import
-          chmod 644 /usr/share/keyrings/wazuh.gpg
+            sudo gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import
+          sudo chmod 644 /usr/share/keyrings/wazuh.gpg
 
       - name: 📦 Add Wazuh APT repository
         run: |
           echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | \
-            tee /etc/apt/sources.list.d/wazuh.list
-          apt-get update
+            sudo tee /etc/apt/sources.list.d/wazuh.list
+          sudo apt-get update
 
       - name: 🧑‍💻 Install Wazuh agent
         env:
           WAZUH_MANAGER: "127.0.0.1"
           WAZUH_AGENT_GROUP: "NewGroup_1"
         run: |
-          WAZUH_MANAGER="${WAZUH_MANAGER}" WAZUH_AGENT_GROUP="${WAZUH_AGENT_GROUP}" apt-get install -y wazuh-agent
+          sudo WAZUH_MANAGER="${WAZUH_MANAGER}" WAZUH_AGENT_GROUP="${WAZUH_AGENT_GROUP}" apt-get install -y wazuh-agent
 
       - name: 🚀 Enable and start Wazuh agent
         run: |
-          systemctl enable wazuh-agent
-          systemctl start wazuh-agent
+          sudo systemctl enable wazuh-agent
+          sudo systemctl start wazuh-agent
 
       - name: Check for connect Wazuh agent to Wazuh GUI
         run: sleep 60
