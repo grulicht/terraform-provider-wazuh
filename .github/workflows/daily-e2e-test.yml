@@ -1,0 +1,118 @@
+name: Daily E2E Tests
+
+on:
+  schedule:
+    - cron: "0 7 * * *" # Every day at 07:00 UTC
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐳 Start Wazuh via Docker Compose
+        run: make up
+
+      - name: Wait for Wazuh
+        run: |
+          for i in {1..30}; do
+            docker ps
+            if curl -sSf https://localhost:443/ >/dev/null; then
+              echo "Wazuh GUI is up!"
+              exit 0
+            fi
+            echo "Waiting for Wazuh GUI..."
+            sleep 5
+          done
+          echo "Wazuh GUI did not start in time"
+          exit 1
+
+      - name: ⬇️ Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: 🔍 Validate formatting (terraform fmt)
+        run: terraform fmt -check -recursive
+
+      - name: 🧪 Run Terraform E2E tests
+        run: |
+          APPLY_ONLY_DIRS=("group_configuration")
+          FULL_CYCLE_DIRS=("group")
+
+          for dir in "${FULL_CYCLE_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running full Terraform cycle in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
+              terraform destroy -auto-approve
+              cd -
+            fi
+          done
+
+          for dir in "${APPLY_ONLY_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running apply-only Terraform in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
+              cd -
+            fi
+          done
+
+      - name: 🧰 Install required packages
+        run: |
+          apt-get update
+          apt-get install -y gnupg apt-transport-https
+
+      - name: 🔑 Add Wazuh GPG key
+        run: |
+          curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | \
+            gpg --no-default-keyring --keyring gnupg-ring:/usr/share/keyrings/wazuh.gpg --import
+          chmod 644 /usr/share/keyrings/wazuh.gpg
+
+      - name: 📦 Add Wazuh APT repository
+        run: |
+          echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | \
+            tee /etc/apt/sources.list.d/wazuh.list
+          apt-get update
+
+      - name: 🧑‍💻 Install Wazuh agent
+        env:
+          WAZUH_MANAGER: "127.0.0.1"
+          WAZUH_AGENT_GROUP: "NewGroup_1"
+        run: |
+          WAZUH_MANAGER="${WAZUH_MANAGER}" WAZUH_AGENT_GROUP="${WAZUH_AGENT_GROUP}" apt-get install -y wazuh-agent
+
+      - name: 🚀 Enable and start Wazuh agent
+        run: |
+          systemctl enable wazuh-agent
+          systemctl start wazuh-agent
+
+      - name: Check for connect Wazuh agent to Wazuh GUI
+        run: sleep 60
+
+      - name: 🧪 Run Terraform E2E tests for Agents
+        run: |
+          FULL_CYCLE_DIRS=("active_response")
+
+          for dir in "${FULL_CYCLE_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running full Terraform cycle in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
+              terraform destroy -auto-approve
+              cd -
+            fi
+          done

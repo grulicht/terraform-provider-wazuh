@@ -1,0 +1,11 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before asking a question, make sure it hasn't been already asked and answered. You can search our [discussions](https://github.com/grulicht/terraform-provider-wazuh/discussions) and [bug reports](https://github.com/grulicht/terraform-provider-wazuh/issues) in GitHub.
+
+  - type: textarea
+    attributes:
+      label: Ask a Question!
+    validations:
+      required: true
