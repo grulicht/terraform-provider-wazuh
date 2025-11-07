@@ -2,7 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Question
     url: https://github.com/grulicht/terraform-provider-wazuh/discussions/new?category=help
-    about: Ask us a question about Zabbix usage or deployment.
+    about: Ask us a question about Wazuh usage or deployment.
   - name: Idea or Feature Request
     url: https://github.com/grulicht/terraform-provider-wazuh/discussions/new?category=ideas
-    about: Suggest an idea or feature/enhancement that should be added in Zabbix.
+    about: Suggest an idea or feature/enhancement that should be added in Wazuh.
