@@ -20,7 +20,7 @@ jobs:
         run: |
           for i in {1..30}; do
             docker ps
-            if curl -sSf https://localhost:443/ >/dev/null; then
+            if curl -k -sSf https://localhost:443/ >/dev/null; then
               echo "Wazuh GUI is up!"
               exit 0
             fi
