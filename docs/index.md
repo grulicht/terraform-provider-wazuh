@@ -71,9 +71,34 @@ export WAZUH_SKIP_SSL_VERIFY=true
 ## 🧱 Supported Resources
 | Resource                                       | Status                                                                |
 |------------------------------------------------|-----------------------------------------------------------------------|
-| `wazuh_group`                                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)         |
-| `wazuh_configuration`                          | ![Done](https://img.shields.io/badge/status-done-brightgreen)         |
-| `wazuh_active_response`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)         |
+| `wazuh_group`                                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_configuration`                          | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_active_response`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_event`                                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_cdb_list`                               | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_decoder`                                | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_node_configuration`                     | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_node_restart`                           | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_node_analysisd_reload`                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_logtest`                                | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_rootcheck`                              | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_syscheck`                               | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_rule`                                   | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_manager_configuration`                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_manager_restart`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent`                                  | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_agent_group`                            | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_agent_restart`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_agent_upgrade`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_agent_upgrade_custom`                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_user`                                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_role`                                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_security_rule`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_policy`                                 | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_role_user`                              | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_security_rule_user`                     | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_policy_user`                            | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_security_config`                        | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
 
 ---
 
