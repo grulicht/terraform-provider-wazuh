@@ -27,10 +27,6 @@ jobs:
       - name: Show OpenTofu version
         run: tofu version
 
-      - name: Patch main.tf files to use opentofu name of Wazuh OpenTofu provider
-        run: |
-          find examples -name "main.tf" -exec sed -i 's|source *= *"grulicht/wazuh"' {} +
-
       - name: Initialize OpenTofu
         run: make o-init
 
