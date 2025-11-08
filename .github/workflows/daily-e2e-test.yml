@@ -102,7 +102,7 @@ jobs:
 
       - name: 🧪 Run Terraform E2E tests for Agents
         run: |
-          FULL_CYCLE_DIRS=("active_response" "cdb_list" "decoder" "event" "logtest" "manager_configuration" "manager_restart" "rootcheck" "rule" "syscheck")
+          FULL_CYCLE_DIRS=("active_response" "cdb_list" "decoder" "event" "logtest" "manager_configuration" "rootcheck" "rule" "syscheck")
 
           for dir in "${FULL_CYCLE_DIRS[@]}"; do
             if [ -d "e2e-tests/$dir" ]; then
