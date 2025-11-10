@@ -33,7 +33,7 @@ variable "wazuh_agent_name" {
 variable "wazuh_agent_ip" {
   type        = string
   description = "IP address or hostname of the Wazuh agent."
-  default     = "127.0.0.1"
+  default     = "127.0.0.2"
 }
 
 variable "wazuh_agent_purge_on_destroy" {

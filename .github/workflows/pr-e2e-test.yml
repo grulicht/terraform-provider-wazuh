@@ -43,6 +43,36 @@ jobs:
         with:
           terraform_version: 1.6.6
 
+      - name: 🧪 Run Terraform E2E tests
+        run: |
+          APPLY_ONLY_DIRS=("group_configuration")
+          FULL_CYCLE_DIRS=("group")
+
+          for dir in "${FULL_CYCLE_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running full Terraform cycle in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
+              terraform destroy -auto-approve
+              cd -
+            fi
+          done
+
+          for dir in "${APPLY_ONLY_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running apply-only Terraform in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
+              cd -
+            fi
+          done
+
       - name: 🧰 Install required packages
         run: |
           sudo apt-get update
@@ -80,9 +110,8 @@ jobs:
 
       - name: 🧪 Run Terraform E2E tests
         run: |
-          APPLY_ONLY_DIRS=("group_configuration")
+          APPLY_ONLY_DIRS=("")
           FULL_CYCLE_DIRS=(
-            "group"
             "cdb_list"
             "decoder"
             "event"
