@@ -83,6 +83,7 @@ jobs:
           APPLY_ONLY_DIRS=("group_configuration")
           FULL_CYCLE_DIRS=(
             "group"
+            "agent"
             "active_response"
             "cdb_list"
             "decoder"
@@ -92,7 +93,6 @@ jobs:
             "rootcheck"
             "rule"
             "syscheck"
-            "agent"
             "agent_group"
             "agent_reconnect"
             "agent_restart"
