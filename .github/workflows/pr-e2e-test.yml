@@ -43,9 +43,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: 🔍 Validate formatting (terraform fmt)
-        run: terraform fmt -check -recursive
-
       - name: 🧪 Run Terraform E2E tests
         run: |
           APPLY_ONLY_DIRS=("group_configuration")
@@ -108,9 +105,31 @@ jobs:
       - name: Check for connect Wazuh agent to Wazuh GUI
         run: sleep 60
 
-      - name: 🧪 Run Terraform E2E tests for Agents
+      - name: 🔍 Validate formatting (terraform fmt)
+        run: terraform fmt -check -recursive
+
+      - name: 🧪 Run Terraform E2E tests
         run: |
-          FULL_CYCLE_DIRS=("active_response" "cdb_list" "decoder" "event" "logtest" "manager_configuration" "rootcheck" "rule" "syscheck")
+          FULL_CYCLE_DIRS=(
+            "active_response"
+            "cdb_list"
+            "decoder"
+            "event"
+            "logtest"
+            "manager_configuration"
+            "rule"
+            "syscheck"
+            "agent_group"
+            "agent_reconnect"
+            "agent_restart"
+            "agent_restart_group"
+            "agent_upgrade"
+            "agent_upgrade_custom"
+            "security_config"
+            "security_rule_policy_role_user"
+            "agent"
+            "rootcheck"
+          )
 
           for dir in "${FULL_CYCLE_DIRS[@]}"; do
             if [ -d "e2e-tests/$dir" ]; then

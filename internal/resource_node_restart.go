@@ -104,7 +104,6 @@ func resourceNodeRestartCreate(ctx context.Context, d *schema.ResourceData, meta
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		// Typicky 202 pro success, ale bereme jakýkoli 2xx jako OK
 		return diag.Errorf("failed to restart nodes: status %d, body: %s", resp.StatusCode, string(respBody))
 	}
 
