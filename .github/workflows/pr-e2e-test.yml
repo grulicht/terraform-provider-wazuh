@@ -73,14 +73,14 @@ jobs:
           sudo systemctl start wazuh-agent
 
       - name: Check for connect Wazuh agent to Wazuh GUI
-        run: sleep 120
+        run: sleep 60
 
       - name: 🔍 Validate formatting (terraform fmt)
         run: terraform fmt -check -recursive
 
       - name: 🧪 Run Terraform E2E tests
         run: |
-          APPLY_ONLY_DIRS=("group_configuration" "active_response")
+          APPLY_ONLY_DIRS=("group_configuration")
           FULL_CYCLE_DIRS=(
             "group"
             "cdb_list"
@@ -88,7 +88,6 @@ jobs:
             "event"
             "logtest"
             "manager_configuration"
-            "rootcheck"
             "rule"
             "syscheck"
             "agent_group"
@@ -101,6 +100,8 @@ jobs:
             "security_config"
             "security_rule_policy_role_user"
             "agent"
+            "rootcheck"
+            "active_response"
           )
 
           for dir in "${FULL_CYCLE_DIRS[@]}"; do
