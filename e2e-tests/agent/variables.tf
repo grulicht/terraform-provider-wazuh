@@ -27,13 +27,13 @@ variable "wazuh_skip_ssl_verify" {
 variable "wazuh_agent_name" {
   type        = string
   description = "Name of the Wazuh agent to be registered."
-  default     = "NewHost_"
+  default     = "NewHost_2"
 }
 
 variable "wazuh_agent_ip" {
   type        = string
   description = "IP address or hostname of the Wazuh agent."
-  default     = "127.0.0.2"
+  default     = "127.0.0.1"
 }
 
 variable "wazuh_agent_purge_on_destroy" {
