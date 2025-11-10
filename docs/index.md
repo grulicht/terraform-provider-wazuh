@@ -86,19 +86,22 @@ export WAZUH_SKIP_SSL_VERIFY=true
 | `wazuh_rule`                                   | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
 | `wazuh_manager_configuration`                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
 | `wazuh_manager_restart`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
-| `wazuh_agent`                                  | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_agent_group`                            | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_agent_restart`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_agent_upgrade`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_agent_upgrade_custom`                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_user`                                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_role`                                   | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_security_rule`                          | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_policy`                                 | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_role_user`                              | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_security_rule_user`                     | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_policy_user`                            | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
-| `wazuh_security_config`                        | ![Planned](https://img.shields.io/badge/status-planned-yellow)       |
+| `wazuh_agent`                                  | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_group`                            | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_node_restart`                     | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_reconnect`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_restart`                          | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_restart_group`                    | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_upgrade`                          | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_agent_upgrade_custom`                   | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_policy`                                 | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_policy_role`                            | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_role`                                   | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_role_user`                              | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_security_config`                        | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_security_rule`                          | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_security_rule_role`                     | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
+| `wazuh_user`                                   | ![Done](https://img.shields.io/badge/status-done-brightgreen)        |
 
 ---
 

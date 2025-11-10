@@ -213,10 +213,7 @@ func resourceRootcheckRead(ctx context.Context, d *schema.ResourceData, meta int
 	return diags
 }
 
-// Update: prozatím jen znovu spustí scan (stejně jako Create)
 func resourceRootcheckUpdate(ctx context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
-	// Kdybychom chtěli, mohli bychom rozlišovat, jestli se změnil agent_id (ForceNew)
-	// nebo jen chceme re-run scan. Tady jednoduše re-use Create logiku.
 	return resourceRootcheckCreate(ctx, d, meta)
 }
 
@@ -251,7 +248,6 @@ func resourceRootcheckDelete(ctx context.Context, d *schema.ResourceData, meta i
 	return diags
 }
 
-// Import: importuje rootcheck pro existující agent_id (bez volání API)
 func resourceRootcheckImport(ctx context.Context, d *schema.ResourceData, meta interface{}) ([]*schema.ResourceData, error) {
 	agentID := d.Id()
 	if err := d.Set("agent_id", agentID); err != nil {
