@@ -103,6 +103,7 @@ jobs:
       - name: 🧪 Run Terraform E2E tests
         run: |
           FULL_CYCLE_DIRS=(
+            "active_response"
             "cdb_list"
             "decoder"
             "event"
@@ -120,7 +121,6 @@ jobs:
             "security_rule_policy_role_user"
             "agent"
             "rootcheck"
-            "active_response"
           )
 
           for dir in "${FULL_CYCLE_DIRS[@]}"; do
