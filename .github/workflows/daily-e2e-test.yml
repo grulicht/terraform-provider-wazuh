@@ -35,39 +35,6 @@ jobs:
         with:
           terraform_version: 1.6.6
 
-      - name: 🔍 Validate formatting (terraform fmt)
-        run: terraform fmt -check -recursive
-
-      - name: 🧪 Run Terraform E2E tests
-        run: |
-          APPLY_ONLY_DIRS=("group_configuration")
-          FULL_CYCLE_DIRS=("group")
-
-          for dir in "${FULL_CYCLE_DIRS[@]}"; do
-            if [ -d "e2e-tests/$dir" ]; then
-              echo "▶️ Running full Terraform cycle in e2e-tests/$dir"
-              cd "e2e-tests/$dir"
-              terraform init -input=false
-              terraform fmt -check
-              terraform validate
-              terraform apply -auto-approve
-              terraform destroy -auto-approve
-              cd -
-            fi
-          done
-
-          for dir in "${APPLY_ONLY_DIRS[@]}"; do
-            if [ -d "e2e-tests/$dir" ]; then
-              echo "▶️ Running apply-only Terraform in e2e-tests/$dir"
-              cd "e2e-tests/$dir"
-              terraform init -input=false
-              terraform fmt -check
-              terraform validate
-              terraform apply -auto-approve
-              cd -
-            fi
-          done
-
       - name: 🧰 Install required packages
         run: |
           sudo apt-get update
@@ -100,9 +67,34 @@ jobs:
       - name: Check for connect Wazuh agent to Wazuh GUI
         run: sleep 60
 
-      - name: 🧪 Run Terraform E2E tests for Agents
+      - name: 🔍 Validate formatting (terraform fmt)
+        run: terraform fmt -check -recursive
+
+      - name: 🧪 Run Terraform E2E tests
         run: |
-          FULL_CYCLE_DIRS=("active_response" "cdb_list" "decoder" "event" "logtest" "manager_configuration" "rootcheck" "rule" "syscheck")
+          APPLY_ONLY_DIRS=("group_configuration")
+          FULL_CYCLE_DIRS=(
+            "group"
+            "active_response"
+            "cdb_list"
+            "decoder"
+            "event"
+            "logtest"
+            "manager_configuration"
+            "rootcheck"
+            "rule"
+            "syscheck"
+            "agent"
+            "agent_group"
+            "agent_reconnect"
+            "agent_restart"
+            "agent_restart_group"
+            "agent_upgrade"
+            "agent_upgrade_custom"
+            "manager_restart"
+            "security_config"
+            "security_rule_policy_role_user"
+          )
 
           for dir in "${FULL_CYCLE_DIRS[@]}"; do
             if [ -d "e2e-tests/$dir" ]; then
@@ -113,6 +105,18 @@ jobs:
               terraform validate
               terraform apply -auto-approve
               terraform destroy -auto-approve
+              cd -
+            fi
+          done
+
+          for dir in "${APPLY_ONLY_DIRS[@]}"; do
+            if [ -d "e2e-tests/$dir" ]; then
+              echo "▶️ Running apply-only Terraform in e2e-tests/$dir"
+              cd "e2e-tests/$dir"
+              terraform init -input=false
+              terraform fmt -check
+              terraform validate
+              terraform apply -auto-approve
               cd -
             fi
           done
