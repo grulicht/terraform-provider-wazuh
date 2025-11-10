@@ -72,11 +72,10 @@ jobs:
 
       - name: 🧪 Run Terraform E2E tests
         run: |
-          APPLY_ONLY_DIRS=("group_configuration")
+          APPLY_ONLY_DIRS=("group_configuration" "active_response")
           FULL_CYCLE_DIRS=(
             "group"
             "agent"
-            "active_response"
             "cdb_list"
             "decoder"
             "event"
