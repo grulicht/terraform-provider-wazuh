@@ -125,7 +125,6 @@ jobs:
             "agent_restart_group"
             "agent_upgrade"
             "agent_upgrade_custom"
-            "manager_restart"
             "security_config"
             "security_rule_policy_role_user"
             "agent"
